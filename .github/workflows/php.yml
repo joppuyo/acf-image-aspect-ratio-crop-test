@@ -21,16 +21,17 @@ jobs:
 
     - name: Build
       run: npx webpack -p
-      
-    - name: Download artifact
-      uses: actions/download-artifact@v1.0.0
-      
+            
     - name: Release
-      if: startsWith(github.ref, 'refs/tags/')
       run: |
         mkdir -p acf-image-aspect-ratio-crop
         cp -r *.php *.md readme.txt assets fields vendor composer.json composer.lock acf-image-aspect-ratio-crop
         zip -r acf-image-aspect-ratio-crop.zip acf-image-aspect-ratio-crop
+      
+    - uses: actions/upload-artifact@master
+      with:
+        name: acf-image-aspect-ratio-crop.zip
+        path: acf-image-aspect-ratio-crop.zip
       
     - name: Release
       uses: softprops/action-gh-release@v1
