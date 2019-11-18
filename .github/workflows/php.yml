@@ -50,8 +50,7 @@ jobs:
       run: |
         git config --global user.email "johannes@siipo.la"
         git config --global user.name "Johannes Siipola"
-        git commit -m "Add changes" -a
-        
+        git add -A -f
         git commit -m "Release ${{ steps.get_version.outputs.VERSION }}"
         git tag "${{ steps.get_version.outputs.VERSION }}"
         
@@ -61,6 +60,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
+        force: true
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
