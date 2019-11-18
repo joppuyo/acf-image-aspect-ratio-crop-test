@@ -67,6 +67,7 @@ jobs:
         github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
         force: true
+        directory: ../acf-image-aspect-ratio-crop-packagist-release-test
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
