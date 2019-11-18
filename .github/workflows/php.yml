@@ -64,7 +64,6 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        directory: acf-image-aspect-ratio-crop-packagist-release-test
         repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
