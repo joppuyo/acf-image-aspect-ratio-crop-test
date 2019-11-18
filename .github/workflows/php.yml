@@ -41,26 +41,26 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: acf-image-aspect-ratio.zip
+        files: acf-image-aspect-ratio-crop.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Commit files
       if: startsWith(github.ref, 'refs/tags/')
       run: |
+        cd ..
+        git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
+        rm -fr acf-image-aspect-ratio-crop-packagist-release/*
+        rm -f acf-image-aspect-ratio-crop-packagist-release/.*
+        rsync -av --progress acf-image-aspect-ratio-crop/acf-image-aspect-ratio-crop/ acf-image-aspect-ratio-crop-packagist-release/ --exclude .git --exclude node_modules --exclude acf-image-aspect-ratio-crop.zip --exclude vendor --exclude=".travis.yml" --exclude=".editorconfig" --exclude=".gitignore" --exclude=".prettierrc.js" --exclude "deploy.sh"
         git config --global user.email "johannes@siipo.la"
         git config --global user.name "Johannes Siipola"
+        cd acf-image-aspect-ratio-crop-packagist-release
         git add -A -f
         git commit -m "Release ${{ steps.get_version.outputs.VERSION }}"
         git tag "${{ steps.get_version.outputs.VERSION }}"
-        
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
-        force: true
+        git push
+        git push --tags
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
