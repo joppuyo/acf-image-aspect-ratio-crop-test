@@ -50,8 +50,10 @@ jobs:
       run: |
         cd ..        
         git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
-        rm -fr acf-image-aspect-ratio-crop-packagist-release-test/*
-        rm -f acf-image-aspect-ratio-crop-packagist-release-test/.*
+        cd acf-image-aspect-ratio-crop-packagist-release-test
+        git rm -rf .
+        git clean -fxd
+        cd ..
         rsync -av --progress acf-image-aspect-ratio-crop-test/acf-image-aspect-ratio-crop/ acf-image-aspect-ratio-crop-packagist-release-test/ --exclude .github/ --exclude .git --exclude node_modules --exclude acf-image-aspect-ratio-crop.zip --exclude vendor --exclude=".travis.yml" --exclude=".editorconfig" --exclude=".gitignore" --exclude=".prettierrc.js" --exclude "deploy.sh"
         git config --global user.email "johannes@siipo.la"
         git config --global user.name "Johannes Siipola"
