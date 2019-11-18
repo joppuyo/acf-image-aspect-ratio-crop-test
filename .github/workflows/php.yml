@@ -63,7 +63,7 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
