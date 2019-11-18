@@ -46,6 +46,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Commit files
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         git config --global user.email "johannes@siipo.la"
         git config --global user.name "Johannes Siipola"
@@ -56,6 +57,7 @@ jobs:
         
     - name: Push changes
       uses: ad-m/github-push-action@master
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         repository: joppuyo/acf-image-aspect-ratio-crop-packagist-release-test
