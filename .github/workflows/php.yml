@@ -54,7 +54,7 @@ jobs:
         git rm -rf .
         git clean -fxd
         cd ..
-        rsync -av --progress acf-image-aspect-ratio-crop-test/acf-image-aspect-ratio-crop/ acf-image-aspect-ratio-crop-packagist-release-test/ --ignore vendor/
+        rsync -av --progress acf-image-aspect-ratio-crop-test/acf-image-aspect-ratio-crop/ acf-image-aspect-ratio-crop-packagist-release-test/ --exclude vendor/
         git config --global user.email "johannes@siipo.la"
         git config --global user.name "Johannes Siipola"
         cd acf-image-aspect-ratio-crop-packagist-release-test
